@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	<!--spring整合分为7步
+	1.扫描包，spring扫描包，扫描项目中spring所管理的包
+	  -->
+	<context:component-scan base-package="mapper"></context:component-scan>
+	<context:component-scan base-package="service"></context:component-scan>
+	<!--
+	2.加载jdbc.properties,spring来管理数据源，加载属性配置文件，有两种方式加载配置文件-->
+	<!-- 加载方式1 -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		忽略没有找到的资源文件
+		<property name="ignoreResourceNotFound" value="true"></property>
+		配置文件地址
+		<property name="locations">
+		如果有多个配置文件则用多个list标签进行依次配置
+			<list>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean> -->
+	<!-- 加载方式2 如果有多个配置文件，则需要在文件名字后用,号进行隔开，逐个添加-->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!--
+	3.配置数据库连接池,这四个参数必须配置，此外还可以配置连接池的大小，默认是4个,注意这个连接池不要选错了-->
+	<bean id="DS" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.Driver}"></property>
+		<property name="url" value="${jdbc.Url}"></property>
+		<property name="username" value="${jdbc.Username}"></property>
+		<property name="password" value="${jdbc.Password}"></property>
+	</bean>
+	<!--
+	4.整合mybaties,获取sqlSessionFactory-->
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> <!-- 生成session工厂的类，是必须的，整合mybaties用的是这个类，整合hivernate用的是localSessionFactorybean -->
+		<!-- 引用数据源,引用上方的数据源，连接数据库 -->
+		<property name="dataSource" ref="DS"></property>
+		<!-- 引入mybatis配置文件，注意当用spring进行mybatis整合之后，该配置文件可以省略，所有配置都在spring中进行管理
+		如果有一些特殊配置可以在该文件进行配置，无特殊配置可以不需要 -->
+		<!-- <property name="configuration" value="classpath:mybatis-config.xml"></property> -->
+		<!--mybatis的映射文件 配置 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+		<!-- 给实体类取别名 -->
+		<property name="typeAliasesPackage" value="pojo"></property>
+	</bean>
+	<!-- 5.配置mybatis的mapper接口层，，自动让spring框架为mapper接口生成对象 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="mapper"></property>
+	</bean>
+	<!-- 6.配置声明式事务，mybatis的事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="DS"></property>
+	</bean>
+	<!-- 7.开启注解事务管理 ,配置声明式事务，大多采用这种方式进行配置-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- r如果需要事务，则需要第六步和第七步 -->
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

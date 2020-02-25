@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.LoginlogMapper">
+	<!-- 插入登录日志表 -->
+ 	<insert id="addIpAndCity">
+		insert into t_loginlog values (null, #{ip}, #{no}, now(),#{location})
+	</insert>
+	<!-- 查询登录足迹,最近10条登录足迹 -->
+	<!-- 查询的时候一定要给一个 resultType，否则报错-->
+	<select id="getLoginList" resultType="pojo.Loginlog">
+		select ip,no,createtime,location from t_loginlog where no=#{no} order by createtime limit 5
+	</select>
+</mapper>
