@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import message.ResultMessage;
 import pojo.Emp;
 import pojo.Loginlog;
 import service.EmpService;
 import service.LoginLogService;
+import util.ResultMessage;
 
 @Controller
 public class EmpController {
@@ -37,9 +37,7 @@ public class EmpController {
 			if (emp1.getFlag()==1) {
 				//登录成功重定向到首页
 				//response.sendRedirect("index.jsp");//将jsp放在webinf文件夹下
-				message=new ResultMessage();
-				message.setResCode(200);
-				message.setResInfo("登录成功！");
+				message=new ResultMessage(200,"登录成功！");
 				//将登陆对象存到sesson中从前台进行取值
 				session.setAttribute("loginEmp", emp1);
 				Loginlog logEntity=new Loginlog();
@@ -50,15 +48,12 @@ public class EmpController {
 				System.out.println("影响条数"+a);
 			} else {
 				//response.getWriter().write("<script>alert('账号状态异常，请联系管理员');location.href='login.jsp'</script>");
-				message=new ResultMessage();
-				message.setResCode(300);
-				message.setResInfo("账号状态异常，请联系管理员！");
+				message=new ResultMessage(300,"账号状态异常，请联系管理员！");
 			}
 		} else {
 //			response.getWriter().write("<script>alert('账号或密码错误，请重新登录');location.href='login.jsp'</script>");
-			message=new ResultMessage();
-			message.setResCode(500);
-			message.setResInfo("账号或密码错误，请重新登录！");
+			message=new ResultMessage(500,"账号或密码错误，请重新登录！");
+			System.out.println(message.getResCode());
 		}
 		return message;
 	}

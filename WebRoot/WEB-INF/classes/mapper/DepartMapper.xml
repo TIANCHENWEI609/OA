@@ -7,7 +7,16 @@
     <result column="createtime" jdbcType="DATE" property="createtime" />
     <result column="del" jdbcType="INTEGER" property="del" />
   </resultMap>
+  <!-- 部门插入 -->
   <insert id="addDepart" parameterType="pojo.Depart">
     insert into t_depart (name, createtime,del) values (#{name}, #{createtime}, 0)
   </insert>
+  <!-- 获取部门总数 -->
+  <select id="departCount" resultType="int">
+	select count(id) from t_depart where del=0
+  </select>
+  <!-- 部门list信息 -->
+  <select id="getDepartList" resultType="pojo.Depart">
+	select id,name,createtime from t_depart where del=0 order by id limit #{pageStart},#{pageSize}
+  </select>
 </mapper>

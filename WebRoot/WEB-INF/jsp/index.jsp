@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <li class="layui-nav-item">
 			     <a href="javascript:;" id="1"><i class="fa fa-sitemap"></i>&nbsp;部门管理</a>
 			      <dl class="layui-nav-child">
-			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_departlist','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
+			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_departlist/1/5','部门列表')">&nbsp;&nbsp;&nbsp;&nbsp;部门列表</a></dd>
 			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_departadd','部门新增')">&nbsp;&nbsp;&nbsp;&nbsp;部门新增</a></dd>
 			      </dl>
 			    </li>

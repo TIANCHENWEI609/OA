@@ -1,9 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri= "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" href="media/layui/css/layui.css" media="all">
-<script src="media/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/OA/media/layui/css/layui.css" media="all">
+<script src="/OA/media/js/jquery.min.js"></script>
+<!-- 打开页面请求ajaxj进行初始化查询 -->
 </head>
 <body>
 	<div class="layui-container">
@@ -29,42 +26,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>01</td>
-					<td>教学部</td>
-					<td>50</td>
-					<td>2015-10-01</td>
-					<td><a class="layui-btn layui-btn-mini" href="departupdate.html">编辑</a>
-						<a class="layui-btn layui-btn-danger layui-btn-mini"
-						lay-event="del" onclick="deleteCourse();">删除</a></td>
-				</tr>
-				<tr>
-					<td>02</td>
-					<td>就业部</td>
-					<td>50</td>
-					<td>2015-10-01</td>
-					<td><a class="layui-btn layui-btn-mini" href="departupdate.html">编辑</a>
-						<a class="layui-btn layui-btn-danger layui-btn-mini" onclick="deleteCourse();">删除</a></td>
-				</tr>
-				<tr>
-					<td>03</td>
-					<td>教务部</td>
-					<td>50</td>
-					<td>2015-10-01</td>
-					<td><a class="layui-btn layui-btn-mini" href="departupdate.html">编辑</a>
-						<a class="layui-btn layui-btn-danger layui-btn-mini" onclick="deleteCourse();">删除</a></td>
-				</tr>
+				<c:forEach items="${PageUtil.records}" var="dept">
+					<tr>
+						<td>${dept.id}</td>
+						<td>${dept.name}</td>
+						<td>0稍后统计</td>
+						<td>${dept.createtime}</td>
+						<td><a class="layui-btn layui-btn-mini" href="departupdate.html">编辑</a>
+							<a class="layui-btn layui-btn-danger layui-btn-mini"
+							lay-event="del" onclick="deleteCourse();">删除</a></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-1">
 						   <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">
 							    <i class="layui-icon">&lt;</i>
 						   </a> 
-							    <span style="color:#009688;font-weight: bold;">1</span> 
-							    <a href="#">2</a> 
-							    <a href="#">3</a>  
-							    <a href="#">4</a> 
-							    <a href="#">5</a> 
+								<c:forEach begin="${PageUtil.pageStart}" end="${PageUtil.pageEnd}" var="itemYM" step="1">
+									<a href="/OA/page_departlist/${itemYM}/5">${itemYM}</a> 
+								</c:forEach>
 							<a href="javascript:;" class="layui-laypage-next layui-disabled" data-page="2"> 
 							    <i class="layui-icon">&gt;</i>
 							</a> 
@@ -72,23 +53,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							   <input type="text" min="1" value="1" class="layui-input">页
 								<button type="button" class="layui-laypage-btn">确定</button>
 							</span> 
-							<span class="layui-laypage-count">共 1 条</span> 
+							<span class="layui-laypage-count">共 ${PageUtil.pageCount}页 ${PageUtil.totalCount}条</span> 
 							<span class="layui-laypage-limits"> 
-							    <select lay-ignore="">
-							        <option value="10" selected="">10 条/页</option>
-									<option value="20">20 条/页</option>
-									<option value="30">30 条/页</option>
-									<option value="40">40 条/页</option>
-									<option value="50">50 条/页</option>
-									<option value="60">60 条/页</option>
-									<option value="70">70 条/页</option>
-									<option value="80">80 条/页</option>
-									<option value="90">90 条/页</option>
+							    <select lay-ignore="" id="numOfPage"><!-- 每页条数 -->
+							        <option id="option5" value="5" selected="">5 条/页</option>
+									<option id="option10" value="10">10 条/页</option>
+									<option id="option20" value="20">20 条/页</option>
+									<option id="option30" value="30">30 条/页</option>
+									<option id="option40" value="40">40 条/页</option>
 							</select>
 							</span>
 						</div>
 	</div>
-	<script src="media/layui/layui.js"></script>
+	<script src="/OA/media/layui/layui.js"></script>
 	
 	<script type="text/javascript">
 	   function deleteCourse(){

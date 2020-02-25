@@ -1,5 +1,7 @@
 package service.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,16 @@ public class DepartServiceImpl implements DepartService {
 	public int addDepart(Depart depart) {
 		// TODO Auto-generated method stub
 		return mapper.addDepart(depart);
+	}
+	@Override
+	public int departCount() {
+		// TODO Auto-generated method stub
+		return mapper.departCount();
+	}
+	@Override
+	public List<Depart> getDepartList(long pageStart, long pageSize) {
+		// TODO Auto-generated method stub
+		return mapper.getDepartList(pageStart, pageSize);
 	}
 
 }

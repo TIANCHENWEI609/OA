@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import pojo.Depart;
 
 /**
@@ -8,5 +10,17 @@ import pojo.Depart;
 * 类说明
 */
 public interface DepartService {
+	//增加部门信息
 	public int addDepart(Depart depart);
+	//分页查询部门信息
+	//获取部门总数
+	public int departCount();
+	//详细的部门信息
+	/**
+	 * 
+	 * @param pageStart	起始记录
+	 * @param pageSize	每页条数
+	 * @return
+	 */
+	public List<Depart> getDepartList(long pageStart,long pageSize);
 }
