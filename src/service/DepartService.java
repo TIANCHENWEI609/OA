@@ -23,4 +23,10 @@ public interface DepartService {
 	 * @return
 	 */
 	public List<Depart> getDepartList(long pageStart,long pageSize);
+	/**
+	 * 部门删除（更新del为1设置部门不可用）
+	 * @param id 部门id
+	 * @return
+	 */
+	public int delDepart(int id);
 }

@@ -15,6 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"> -->
     <link rel="stylesheet" href="media/css/app.css" media="all">
     <link rel="stylesheet" href="media/css/font-awesome.min.css">
+    <script type="text/javascript" src="media/js/jquery.min.js"></script>
+    <script type="text/javascript" src="media/layui/layui.all.js"></script>
     <style type="text/css">
         iframe{
             width: 98%;

@@ -19,4 +19,7 @@
   <select id="getDepartList" resultType="pojo.Depart">
 	select id,name,createtime from t_depart where del=0 order by id limit #{pageStart},#{pageSize}
   </select>
+  <update id="delDepart">
+  	update t_depart set del =1 where id =#{id}
+  </update>
 </mapper>

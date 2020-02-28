@@ -34,5 +34,10 @@ public class DepartServiceImpl implements DepartService {
 		// TODO Auto-generated method stub
 		return mapper.getDepartList(pageStart, pageSize);
 	}
+	@Override
+	public int delDepart(int id) {
+		// TODO Auto-generated method stub
+		return mapper.delDepart(id);
+	}
 
 }

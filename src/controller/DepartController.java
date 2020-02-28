@@ -2,6 +2,9 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.tools.ant.taskdefs.condition.Http;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,27 @@ public class DepartController {
 	@Autowired
 	DepartService service;
 	
+	//部门更新
+	@ResponseBody
+	@RequestMapping(value="/upDeptInfo")
+	public String  updateDeptInfo(Depart depart,String id,HttpRequestHandlerServlet request,HttpSession session){
+		System.out.println(id);
+		session.setAttribute("departInfo", depart);
+		return "departupdate";
+	}
+	//删除部门（假删除，更新del状态）
+	@ResponseBody
+	@RequestMapping(value="/delete_depart")
+	public ResultMessage delDepart(int id){
+		ResultMessage message=null;
+		int count =service.delDepart(id);
+		if (count>0) {
+			message=new ResultMessage(200, "删除部门成功!");
+		}else{
+			message=new ResultMessage(500, "删除部门失败!");
+		}
+		return message;
+	}
 	
 	//部门管理（分页查询寻部门信息）
 	//方法1从地址将页码和页面大小传过来

@@ -21,4 +21,10 @@ public interface DepartMapper {
 	 * @return
 	 */
 	public List<Depart> getDepartList(@Param("pageStart")long pageStart,@Param("pageSize")long pageSize);//采用注解法传参数
+	/**
+	 * 部门删除
+	 * @param id	部门id
+	 * @return
+	 */
+	public int delDepart(int id);
 }
