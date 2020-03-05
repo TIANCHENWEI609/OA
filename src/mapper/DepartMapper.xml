@@ -22,4 +22,10 @@
   <update id="delDepart">
   	update t_depart set del =1 where id =#{id}
   </update>
+  <update id="updateDeptById" parameterType="pojo.Depart">
+  	update t_depart set name =#{name},createtime=#{createtime} where id =#{id}
+  </update>
+  <select id="getAllDepart" resultType="pojo.Depart">
+  	select id,name from t_depart where del =0
+  </select>
 </mapper>

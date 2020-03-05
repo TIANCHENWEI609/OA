@@ -43,4 +43,22 @@ public class TestMybatis {
 			depMapper.addDepart(depart);
 		}
 	}
+	@Test
+	public void addEmp(){
+		Emp emp=new Emp();
+		emp.setDel(0);
+		emp.setDid(2);
+		emp.setEmail("789789@qq.com");
+		emp.setFlag(1);
+		emp.setPass("888888");
+		emp.setPhone("456789");
+		emp.setQq("855623545");
+		emp.setSex("ÄÐ");
+		for (int i = 1; i < 100; i++) {
+			emp.setCreatedate(new SimpleDateFormat("YYYY-MM-dd HH:mm:ss").format(new Date()));
+			emp.setName("²âA"+i);
+			emp.setNo("A620"+i);
+			empMapper.addEmp(emp);
+		}
+	}
 } 

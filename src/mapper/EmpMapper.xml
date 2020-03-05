@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.EmpMapper">
+	<resultMap id="BaseResultMap" type="pojo.Emp">
+	    <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="no" jdbcType="VARCHAR" property="no" />
+	    <result column="pass" jdbcType="VARCHAR" property="pass" />
+	    <result column="name" jdbcType="VARCHAR" property="name" />
+	    <result column="did" jdbcType="INTEGER" property="did" />
+	    <result column="flag" jdbcType="INTEGER" property="flag" />
+	    <result column="sex" jdbcType="VARCHAR" property="sex" />
+	    <result column="email" jdbcType="VARCHAR" property="email" />
+	    <result column="qq" jdbcType="VARCHAR" property="qq" />
+	    <result column="phone" jdbcType="VARCHAR" property="phone" />
+	    <result column="createdate" jdbcType="DATE" property="createdate" />
+	    <result column="photo" jdbcType="VARCHAR" property="photo" />
+	    <result column="del" jdbcType="INTEGER" property="del" />
+ 	</resultMap>
   <select id="login" resultType="Emp">
   	select * from t_emp where no=#{no} and pass=#{pass} and del=0
   </select>
+  <insert id="addEmp" parameterType="pojo.Emp">
+  	insert into t_emp (no,pass,name,did,flag,sex,email,qq,phone,createdate,photo,del) 
+  	values(#{no},888888,#{name},#{did},1,#{sex},#{email},#{qq},#{phone},#{createdate},#{photo},#{del})
+  </insert>
+  <!-- 获取员工总数 -->
+  <select id="empCount" resultType="int">
+	select count(id) from t_emp where del=0
+  </select>
+  <!-- 分页获取员工信息 -->
+  <select id="getEmpList" resultType="pojo.Emp">
+	select id, no,name,did,sex,phone,qq,email,createdate from t_emp where del=0 order by id limit #{pageStart},#{pageSize}
+  </select>
+  <update id="empDel" parameterType="int">
+  	update t_emp set del=1 where id=#{id}
+  </update>
 </mapper>

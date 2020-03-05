@@ -1,17 +1,24 @@
 package controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pojo.Depart;
 import pojo.Emp;
 import pojo.Loginlog;
 import service.EmpService;
 import service.LoginLogService;
+import util.PageUtil;
 import util.ResultMessage;
 
 @Controller
@@ -23,10 +30,49 @@ public class EmpController {
 	@Autowired
 	LoginLogService logService;
 	
+	@RequestMapping(value="/emp_Del")
+	@ResponseBody
+	public ResultMessage empDel(int id){
+		ResultMessage	message=null;
+		int count=empService.empDel(id);
+		if (count>0) {
+			message=new ResultMessage(200, "删除员工成功!");
+		} else {
+			message=new ResultMessage(500, "删除员工失败，请联系管理员!");
+		}
+		return message;
+	}
+	
+	
+	//展示员工列表
+	@RequestMapping(value="/page_Emptlist/{pageIndex}/{pageSize}")
+	//注意：如果声明了Model，则不需要再添加@ResponseBody声明
+	public String getDepartList(@PathVariable("pageIndex")long pageIndex,@PathVariable("pageSize")long pageSize,Model model){
+		//分页的通用写法，最好是创建工具类进行统一管理
+		int totalCount=empService.empCount();
+		List<Emp> emp= empService.getEmpList((pageIndex-1)*pageSize, pageSize);
+		PageUtil<Emp> PageUtil=new PageUtil<Emp>(pageIndex, pageSize, totalCount, emp);
+		model.addAttribute("empPageUtil", PageUtil);
+		return "emplist";
+	}
+	
+	@RequestMapping(value="/empAdd")
+	@ResponseBody
+	public ResultMessage addEmp(Emp emp){
+		ResultMessage message=null;
+		int count=empService.addEmp(emp);
+		if (count>0) {
+			message=new ResultMessage(200, "新增成功!");
+		} else {
+			message=new ResultMessage(500, "新增失败，请联系管理员!");
+		}
+		return message;
+	}
+	
 	//登录验证
 	//注意！！！@RequestMapping注解可以相应get请求也可以相应post请求，@getMapping之相应get请求，@postMapping只相应post请求
 	@RequestMapping(value="/emp_login")
-	@ResponseBody
+	@ResponseBody	//需要返回json对象才需要添加该注解，如果只返回跳转的界面，不要＋该注解，不然会返回字符串
 	public ResultMessage login(Emp emp,String loginIp,String loginCity,HttpServletResponse response,HttpSession session) throws Exception{
 		response.setContentType("text/html;charset=utf-8");//就算是增加了编码过滤器，依然要进行这样设置，不然还是会乱码！！！
 		ResultMessage message=null;

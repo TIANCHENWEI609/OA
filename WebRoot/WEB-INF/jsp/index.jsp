@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="media/images/logo.png" class="layui-nav-img">
+                    <img src="/OA/media/fileUpload/${sessionScope.loginEmp.photo}" class="layui-nav-img">
                     <!-- 通过sesson取得登录对象 -->
                     ${sessionScope.loginEmp.name}<!-- 注意不要把session写错了 -->
                 </a>
@@ -93,8 +93,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <li class="layui-nav-item">
 			     <a href="javascript:;" id="1"><i class="layui-icon layui-icon-user"></i>&nbsp;员工管理</a>
 			      <dl class="layui-nav-child">
-			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'emplist.html','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
-			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'empadd.html','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
+			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_Emptlist/1/5','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
+			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_empadd','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
 			      </dl>
 			    </li>
                 <li class="layui-nav-item">

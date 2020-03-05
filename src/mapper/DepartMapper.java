@@ -27,4 +27,16 @@ public interface DepartMapper {
 	 * @return
 	 */
 	public int delDepart(int id);
+	/**
+	 * 根据ID修改部门信息
+	 * @param id
+	 * @param name
+	 * @param time
+	 * @return
+	 */
+	public int updateDeptById(Depart depart);
+	/**
+	 * 查询所有的部门信息
+	 */
+	public List<Depart> getAllDepart();
 }

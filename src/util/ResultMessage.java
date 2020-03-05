@@ -3,6 +3,7 @@ package util;
 import lombok.Data;
 
 //用lombok进行管理，可以省去set和get方法，更方便的用法再pageUtil中通过，index和count进行pageStart和pageEnd的设置
+//字段少可以用这种方式，字段多还是用get和set方法比较自由。
 @Data
 public class ResultMessage {
 	

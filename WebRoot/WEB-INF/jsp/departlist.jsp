@@ -56,9 +56,12 @@
 						<td>${dept.name}</td>
 						<td>0稍后统计</td>
 						<td>${dept.createtime}</td>
-						<td><a class="layui-btn layui-btn-mini" href="/OA/upDeptInfo?id=${dept.id}">编辑</a>
+						<!-- 跳转维护界面 -->
+						<td align='center' valian='middle'>
+							<a class="layui-btn layui-btn-mini" href="/OA/goUpDeptPage/${dept.id},${dept.name},${dept.createtime}">编辑</a>
 							<a class="layui-btn layui-btn-danger layui-btn-mini"
-							lay-event="del" onclick="deleteDepart(${dept.id});">删除</a></td>
+							lay-event="del" onclick="deleteDepart(${dept.id});">删除</a>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
