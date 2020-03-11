@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
+
 import pojo.Depart;
 import pojo.Emp;
 import pojo.Loginlog;
+import service.DepartService;
 import service.EmpService;
 import service.LoginLogService;
+import util.EmpCount;
 import util.PageUtil;
 import util.ResultMessage;
 
@@ -29,6 +33,19 @@ public class EmpController {
 	//增加ip和地点，需要用到LoginLog的信息，增加相关注入
 	@Autowired
 	LoginLogService logService;
+	@Autowired
+	DepartService depService;
+	
+	@RequestMapping(value="/toEmpCount")
+	public String getEmpCount(Model model){
+		List<String> depList=depService.getAllDepartName();
+		String depInfo=JSONObject.toJSONString(depList);
+		List<EmpCount> empCount=empService.getEmp_Dep();
+		String emp_dep=JSONObject.toJSONString(empCount);
+		model.addAttribute("depInfo", depInfo);
+		model.addAttribute("emp_dep", emp_dep);
+		return "empCount";
+	}
 	
 	@RequestMapping(value="/emp_Del")
 	@ResponseBody

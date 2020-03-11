@@ -28,4 +28,10 @@
   <select id="getAllDepart" resultType="pojo.Depart">
   	select id,name from t_depart where del =0
   </select>
+  <select id="getAllDepartName" resultType="String">
+  	select name from t_depart where del =0
+  </select>
+  <select id="getDepartInfoById" resultType="pojo.Depart">
+  	select id,name,createtime from t_depart where id =#{id}
+  </select>
 </mapper>

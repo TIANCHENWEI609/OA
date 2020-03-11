@@ -28,10 +28,33 @@
 	select count(id) from t_emp where del=0
   </select>
   <!-- 分页获取员工信息 -->
-  <select id="getEmpList" resultType="pojo.Emp">
-	select id, no,name,did,sex,phone,qq,email,createdate from t_emp where del=0 order by id limit #{pageStart},#{pageSize}
+  <!-- 注意查询员工信息需要和部门表进行联查,返回就不能返回Emp了，需要用一个Map进行接收 -->
+  <select id="getEmpList" resultMap="EmpMap">
+	select E.id, E.no,E.name,E.did,E.sex,E.phone,E.qq,E.email,E.createdate,D.name as 'Dname' from t_emp E inner join t_depart D  on E.did=D.id and E.del=0 order by E.id limit #{pageStart},#{pageSize}
   </select>
+  
+  <!-- 注意这里的id和type不要搞反了！！！ -->
+  <resultMap id="EmpMap" type="pojo.Emp">
+  		<id column="id" property="id"/>
+  		<id column="no" property="no"/>
+  		<id column="name" property="name"/>
+  		<id column="did" property="did"/>
+  		<id column="sex" property="sex"/>
+  		<id column="phone" property="phone"/>
+  		<id column="qq" property="qq"/>
+  		<id column="email" property="email"/>
+  		<id column="createdate" property="createdate"/>
+  		<!-- 对部门信息进行映射 -->
+  		<association property="depart" javaType="Depart">
+  			<result column="Dname" property="name"/>
+  		</association>
+  </resultMap>
   <update id="empDel" parameterType="int">
   	update t_emp set del=1 where id=#{id}
   </update>
+  <!-- 员工饼状图 统计 -->
+  <!-- 注意返回类型可以指定其他的任意类的对象，只需要把路径指定正确即可 -->
+  <select id="getEmp_Dep" resultType="util.EmpCount">
+  		SELECT COUNT(E.id) AS value,D.name as name from t_emp E INNER JOIN t_depart D ON E.did=D.id GROUP BY E.did;
+  </select>
 </mapper>

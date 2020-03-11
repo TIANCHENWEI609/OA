@@ -8,6 +8,6 @@
 	<!-- 查询登录足迹,最近10条登录足迹 -->
 	<!-- 查询的时候一定要给一个 resultType，否则报错-->
 	<select id="getLoginList" resultType="pojo.Loginlog">
-		select ip,no,createtime,location from t_loginlog where no=#{no} order by createtime limit 5
+		select ip,no,createtime,location from t_loginlog where no=#{no} order by createtime desc limit 5
 	</select>
 </mapper>

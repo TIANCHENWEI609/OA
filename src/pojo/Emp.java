@@ -1,5 +1,7 @@
 package pojo;
 
+import util.EmpCount;
+
 public class Emp {
     private long id;
 
@@ -26,6 +28,17 @@ public class Emp {
     private String photo;
 
     private long del;
+    
+    private Depart depart;
+    private EmpCount empCount;
+
+	public EmpCount getEmpCount() {
+		return empCount;
+	}
+
+	public void setEmpCount(EmpCount empCount) {
+		this.empCount = empCount;
+	}
 
 	public long getId() {
 		return id;
@@ -129,6 +142,14 @@ public class Emp {
 
 	public void setDel(long del) {
 		this.del = del;
+	}
+
+	public Depart getDepart() {
+		return depart;
+	}
+
+	public void setDepart(Depart depart) {
+		this.depart = depart;
 	}
 
     

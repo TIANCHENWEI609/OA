@@ -39,4 +39,7 @@ public interface DepartMapper {
 	 * 查询所有的部门信息
 	 */
 	public List<Depart> getAllDepart();
+	
+	public List<String> getAllDepartName();
+
 }

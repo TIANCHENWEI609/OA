@@ -3,6 +3,7 @@ package test;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 /**
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.alibaba.fastjson.JSONObject;
+
 import mapper.DepartMapper;
 import mapper.EmpMapper;
 import pojo.Depart;
@@ -20,7 +23,7 @@ import pojo.Emp;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class TestMybatis {
+public class JUnitTest {
 	@Autowired
 	EmpMapper empMapper;
 	@Autowired
@@ -60,5 +63,25 @@ public class TestMybatis {
 			emp.setNo("A620"+i);
 			empMapper.addEmp(emp);
 		}
+	}
+	
+	@Test
+	public void getEmapInfo(){
+		List<Emp> emp=empMapper.getEmpList(0, 5);
+		for (int i = 0; i < emp.size(); i++) {
+			emp.get(i).getDepart().getName();
+		}
+	}
+	@Test
+	public void getDepartName(){
+		List depList=depMapper.getAllDepartName();
+		String depName=JSONObject.toJSONString(depList);
+		System.out.println(depName);
+	}
+	@Test
+	public void getEmp_dep(){
+		List depList=empMapper.getEmp_Dep();
+		String depName=JSONObject.toJSONString(depList);
+		System.out.println(depName);
 	}
 } 

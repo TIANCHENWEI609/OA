@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import mapper.EmpMapper;
 import pojo.Emp;
 import service.EmpService;
+import util.EmpCount;
 @Service
 public class EmpServiceImpl implements EmpService {
 
@@ -45,5 +46,12 @@ public class EmpServiceImpl implements EmpService {
 		// TODO Auto-generated method stub
 		return empMapper.empDel(id);
 	}
+	/**
+	 * 获取每个部门的员工总数
+	 * @return
+	 */
+	public List<EmpCount> getEmp_Dep(){
+		return empMapper.getEmp_Dep();
+	};
 
 }

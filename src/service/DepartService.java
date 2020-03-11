@@ -41,4 +41,6 @@ public interface DepartService {
 	 * 查询所有部门信息
 	 */
 	public List<Depart> getAllDepart();
+	
+	public List<String> getAllDepartName();
 }

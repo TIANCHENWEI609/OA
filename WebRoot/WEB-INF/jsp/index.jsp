@@ -95,6 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			      <dl class="layui-nav-child">
 			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_Emptlist/1/5','员工列表')">&nbsp;&nbsp;&nbsp;&nbsp;员工列表</a></dd>
 			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/page_empadd','员工新增')">&nbsp;&nbsp;&nbsp;&nbsp;员工新增</a></dd>
+			      	  <dd><a href="javascript:;" id="2" onclick="showTab(1,'/OA/toEmpCount','员工统计')">&nbsp;&nbsp;&nbsp;&nbsp;员工统计</a></dd>
 			      </dl>
 			    </li>
                 <li class="layui-nav-item">
@@ -134,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div class="layui-footer">
         <p>
-            Copyright 2011-2018 <a href="http://www.1000phone.com/"
+            Copyright 2011-2018 <a href="#"
                                    rel="nofollow" target="_blank" title="#">北京协同科技有限公司 
             版权所有</a> 京ICP备1200XXX1号-3 京公网安备1101XXXXX11455号
         </p>

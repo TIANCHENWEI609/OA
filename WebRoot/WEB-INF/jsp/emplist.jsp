@@ -60,7 +60,7 @@
 						<td hidden="hidden">${empInfo.id}</td>
 						<td>${empInfo.no}</td>
 						<td>${empInfo.name}</td>
-						<td>${empInfo.did}</td>
+						<td>${empInfo.depart.name}</td>
 						<td>${empInfo.sex}</td>
 						<td>${empInfo.phone}</td>
 						<td>${empInfo.qq}</td>
@@ -68,7 +68,7 @@
 						<td>${empInfo.createdate}</td>
 						<td align='center' valian='middle'>
 						<!-- layui-btn-sm小型按钮，更美观 -->
-							<a class="layui-btn layui-btn-sm" href="empupdate.html" style="width: 50">编辑</a>
+							<a class="layui-btn layui-btn-sm" href="/OA/page_empupdate" style="width: 50">编辑</a>
 							<a class="layui-btn layui-btn-danger layui-btn-sm" style="width: 50"
 							lay-event="del" onclick="deleteCourse(${empInfo.id});">删除</a>
 						</td>
