@@ -11,24 +11,41 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" href="media/layui/css/layui.css" media="all">
-<script type="text/javascript" src="media/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/OA/media/layui/css/layui.css" media="all">
+<script type="text/javascript" src="/OA/media/js/jquery.min.js"></script>
+<script type="text/javascript">
+	function updateEmpInfo(){
+		$.post("/OA/empUpdate",$("#uptFom").serialize(),function(result){
+			if(result.resCode==200){
+				layer.msg(result.resInfo, {icon : 6,time: 1000,shade:0.4},//带遮盖层
+					function(){//带有遮盖层，提示之后再刷新界面，视觉比较好
+			   			window.location.href="/OA/page_Emptlist/1/5";//更新成功，返回列表
+			   		});
+			}else{
+				layer.msg(result.resInfo, {icon : 5,time: 1000,shade:0.4});
+			}
+		},'json');
+	}
+
+</script>
+
 </head>
 <body>
 	<div class="layui-container" style="margin-top: 5px">
-		<form class="layui-form" action="staffadd.do" method="post" >
+		<form class="layui-form" action="staffadd.do" method="post" id="uptFom" >
 			<div class="layui-form-item">
+				<input type="hidden" name="id" value="${empInfoUpt.id}">
 				<label class="layui-form-label">员工工号</label>
 				<div class="layui-input-block">
-					<input type="text" name="no" lay-verify="name" autocomplete="off"
-						placeholder="请输入工号" id="no1" class="layui-input">
+					<input type="text" name="no" lay-verify="name" readonly autocomplete="off"
+						placeholder="请输入工号" id="no1" class="layui-input " value="${empInfoUpt.no}">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label">员工姓名</label>
 				<div class="layui-input-block">
 					<input type="text" name="name" lay-verify="name" autocomplete="off"
-						placeholder="请输入姓名" class="layui-input">
+						placeholder="请输入姓名" class="layui-input" value="${empInfoUpt.name }">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -42,32 +59,32 @@
             <div class="layui-form-item">
             <label class="layui-form-label">性别</label>
 	            <div class="layui-input-block">
-	                <input type="radio" name="sex" value="男" title="男" checked>
-	                <input type="radio" name="sex" value="女" title="女">
+	                <input type="radio" name="sex" value="男" title="男" ${empInfoUpt.sex=="男"?"checked":""}>
+	                <input type="radio" name="sex" value="女" title="女" ${empInfoUpt.sex=="女"?"checked":""}>
 	            </div>
         	</div>
 	  		<div class="layui-form-item">
 	            <label class="layui-form-label">邮箱</label>
 	            <div class="layui-input-inline">
-	                <input type="text" name="email" lay-verify="required" placeholder="请输入有效邮箱" autocomplete="off" class="layui-input">
+	                <input type="text" name="email" lay-verify="required" placeholder="请输入有效邮箱" autocomplete="off" class="layui-input" value="${empInfoUpt.email }">
 	            </div>
 	        </div>
 	  		<div class="layui-form-item">
 	            <label class="layui-form-label">手机号</label>
 	            <div class="layui-input-inline">
-	                <input type="text" name="phone" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+	                <input type="text" name="phone" lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input" value="${empInfoUpt.phone }">
 	            </div>
 	        </div>
 	  		<div class="layui-form-item">
 	            <label class="layui-form-label">QQ</label>
 	            <div class="layui-input-inline">
-	                <input type="text" name="qq" lay-verify="required" placeholder="请输入QQ号码" autocomplete="off" class="layui-input">
+	                <input type="text" name="qq" lay-verify="required" placeholder="请输入QQ号码" autocomplete="off" class="layui-input" value="${empInfoUpt.qq }">
 	            </div>
 	        </div>
 	  		<div class="layui-form-item">
 	             <label class="layui-form-label">入职日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="createdate" id="date" autocomplete="off" class="layui-input">
+                    <input type="text" name="createdate" id="date" autocomplete="off" class="layui-input" value="${empInfoUpt.createdate }">
                 </div>
 	        </div>
  			<div class="layui-form-item">
@@ -75,19 +92,19 @@
  				 <button type="button" class="layui-btn" id="upfile">
 				  <i class="layui-icon">&#xe67c;</i>上传图片
 				</button>
-				<input type="hidden" name="photo" id="p1">
+				<input type="hidden" name="photo" id="p1" value="${empInfoUpt.photo}">
  				 <div class="layui-input-block">
- 				 	<img alt="个人一寸照片"  id="img1" width="200px" height="300px">
+ 				 	<img alt="个人一寸照片"  id="img1" width="200px" height="200px" src="/OA/media/fileUpload/${empInfoUpt.photo}">
  				 </div>
  			</div>
 			<div class="layui-form-item">
-				<input class="layui-btn"  style="margin-left: 10%"  id="btn1" disabled="disabled" type="submit" value="确认新增">
+				<input class="layui-btn"  style="margin-left: 10%"  id="btn1" type="button" value="确认新增" onclick="updateEmpInfo()">
 			</div>
 		</form>
 	</div>
 
 
-	<script src="media/layui/layui.js"></script>
+	<script src="/OA/media/layui/layui.js"></script>
 	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 	<script>
 	var form;
@@ -97,22 +114,21 @@
 						function() {
 							form = layui.form, layer = layui.layer, layedit = layui.layedit, laydate = layui.laydate;
 							var upload = layui.upload;
-							   
 							  //执行实例
 							  var uploadInst = upload.render({
 							    elem: '#upfile' //绑定元素
-							    ,url: 'photoupload.do' //上传接口
-							    ,done: function(obj){
+							    ,url: '/OA/fileUpload' //上传接口
+							    ,done: function(result){
 							      //上传完毕回调
-							      console.log(obj);
-							      if(obj.code==1000){
-							    	  $("#p1").val(obj.msg);
-								      $("#img1")[0].src="/tickresource/"+obj.msg;
-							      	  $("#btn1").attr("disabled",false);
-							      }else{
-							    	  $("#img1")[0].src="media/images/cw1.jpg";
+							      if(result.resCode==200){
+							      		layer.msg("上传成功!", {icon : 6,time: 1000,shade:0.4});//带有覆盖层的提示
+						    	   		$("#p1").val(result.resInfo);
+							     		$("#img1")[0].src="/OA/media/fileUpload/"+result.resInfo;
+						      	 		$("#btn1").attr("disabled",false);
+							      }else{//上传失败进行提示
+							    	  	layer.msg(result.resInfo, {icon : 5,time: 1500,shade:0.4});//带有覆盖层的提示
+							    	  	return;
 							      }
-							      
 							    }
 							    ,error: function(){
 							      //请求异常回调
@@ -140,20 +156,22 @@
 		});
 		//初始化数据
 		function initData() {
-			$.get("departall.do",null,function(arr){
+			$.get("/OA/getAllDeptList",null,function(arr){
 				for(i=0;i<arr.length;i++){
 					$("#cds").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>");
 				}
+				$("#cds").val(${empInfoUpt.did });//设置值可以自动选中
 				form.render("select");
-			});
-			$.get("staffno.do",null,function(obj){
+			},"json");
+			//员工职位查询暂时不需要
+			/* $.get("staffno.do",null,function(obj){
 				if(obj.msg=='null'){
 					$("#no1").val("qf000001");
 				}else{
 					$("#no1").val(obj.msg+1);
 				}
 				
-			})
+			}) */
 		}
 	</script>
 </body>

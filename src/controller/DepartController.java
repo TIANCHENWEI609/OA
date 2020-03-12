@@ -59,14 +59,10 @@ public class DepartController {
 	}
 	
 	//部门更新
-	@RequestMapping(value="/goUpDeptPage/{id},{name},{crtTime}")
-	public String goUpDeptPage(@PathVariable("id") int id,@PathVariable("name") String name,@PathVariable("crtTime") String crtTime,Model model,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	@RequestMapping(value="/goUpDeptPage/{id}")
+	public String goUpDeptPage(@PathVariable("id") int id ,Model model,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");//就算是增加了编码过滤器，依然要进行这样设置，不然还是会乱码！！！
-		name=new String(name.getBytes(("iso-8859-1")), "UTF-8");
-		Depart departObj=new Depart();
-		departObj.setId(id);
-		departObj.setName(name);
-		departObj.setCreatetime(crtTime);
+		Depart departObj=service.getDepartById(id);
 		model.addAttribute("Depart", departObj);
 		return "departupdate";
 	}

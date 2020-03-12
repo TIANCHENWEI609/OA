@@ -34,4 +34,12 @@ public interface EmpMapper {
 	 * @return
 	 */
 	public List<EmpCount> getEmp_Dep();
+	/**
+	 * 根据id获取部门信息
+	 * @param id
+	 * @return
+	 */
+	public Emp getEmpById(int id);
+	
+	public int updateEmpById(Emp emp);
 }

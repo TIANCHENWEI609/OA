@@ -57,4 +57,12 @@
   <select id="getEmp_Dep" resultType="util.EmpCount">
   		SELECT COUNT(E.id) AS value,D.name as name from t_emp E INNER JOIN t_depart D ON E.did=D.id GROUP BY E.did;
   </select>
+  
+  <select id="getEmpById" resultType="pojo.Emp">
+  		select id, no,name,did,sex,phone,qq,email,createdate,photo from t_emp where id=#{id}
+  </select>
+  <!-- 注意要用#号不能用$号，否则报莫名其妙的错误！！！ -->
+  <update id="updateEmpById" parameterType="pojo.Emp">
+  	update t_emp set name=#{name},did=#{did},sex=#{sex},phone=#{phone},qq=#{qq},email=#{email},createdate=#{createdate},photo=#{photo} where id=#{id} and no=#{no}
+  </update>
 </mapper>

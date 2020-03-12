@@ -43,4 +43,10 @@ public interface DepartService {
 	public List<Depart> getAllDepart();
 	
 	public List<String> getAllDepartName();
+	/**
+	 * 根据id获取部门信息
+	 * @param id
+	 * @return
+	 */
+	public Depart getDepartById(int id);
 }

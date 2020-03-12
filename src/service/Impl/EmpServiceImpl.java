@@ -52,6 +52,17 @@ public class EmpServiceImpl implements EmpService {
 	 */
 	public List<EmpCount> getEmp_Dep(){
 		return empMapper.getEmp_Dep();
+	}
+	
+	@Override
+	public Emp getEmpById(int id) {
+		// TODO Auto-generated method stub
+		return empMapper.getEmpById(id);
+	}
+	@Override
+	public int updateEmpById(Emp emp) {
+		// TODO Auto-generated method stub
+		return empMapper.updateEmpById(emp);
 	};
 
 }

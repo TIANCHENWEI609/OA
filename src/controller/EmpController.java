@@ -36,6 +36,26 @@ public class EmpController {
 	@Autowired
 	DepartService depService;
 	
+	//员工信息维护提交确认
+	@RequestMapping(value="/empUpdate")
+	@ResponseBody
+	public ResultMessage empUpdate(Emp emp){
+		ResultMessage message=null;
+		int num=empService.updateEmpById(emp);
+		if (num>0) {
+			message=new ResultMessage(200, "更新成功!");
+		} else {
+			message=new ResultMessage(500, "更新失败，请联系管理员!");
+		}
+		return message;
+	}
+	//跳转到员工信息维护界面
+	@RequestMapping(value="/toEmpUpdPg/{id}")
+	public String toEmpUpdatePg(@PathVariable("id") int id,Model model){
+		Emp empInfo=empService.getEmpById(id);
+		model.addAttribute("empInfoUpt",empInfo);
+		return "empupdate";
+	}
 	@RequestMapping(value="/toEmpCount")
 	public String getEmpCount(Model model){
 		List<String> depList=depService.getAllDepartName();

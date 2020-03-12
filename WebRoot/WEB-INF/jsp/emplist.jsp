@@ -68,7 +68,7 @@
 						<td>${empInfo.createdate}</td>
 						<td align='center' valian='middle'>
 						<!-- layui-btn-sm小型按钮，更美观 -->
-							<a class="layui-btn layui-btn-sm" href="/OA/page_empupdate" style="width: 50">编辑</a>
+							<a class="layui-btn layui-btn-sm" href="/OA/toEmpUpdPg/${empInfo.id}" style="width: 50">编辑</a>
 							<a class="layui-btn layui-btn-danger layui-btn-sm" style="width: 50"
 							lay-event="del" onclick="deleteCourse(${empInfo.id});">删除</a>
 						</td>

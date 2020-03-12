@@ -20,4 +20,12 @@ public interface EmpService {
 	 * @return
 	 */
 	public List<EmpCount> getEmp_Dep();
+	/**
+	 * 根据id获取员工信息
+	 * @param id
+	 * @return
+	 */
+	public Emp getEmpById(int id);
+	//根据ID和工号维护信息
+	public int updateEmpById(Emp emp);
 }

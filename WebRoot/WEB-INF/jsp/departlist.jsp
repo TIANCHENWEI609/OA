@@ -58,7 +58,7 @@
 						<td>${dept.createtime}</td>
 						<!-- 跳转维护界面 -->
 						<td align='center' valian='middle'>
-							<a class="layui-btn layui-btn-mini" href="/OA/goUpDeptPage/${dept.id},${dept.name},${dept.createtime}">编辑</a>
+							<a class="layui-btn layui-btn-mini" href="/OA/goUpDeptPage/${dept.id}">编辑</a>
 							<a class="layui-btn layui-btn-danger layui-btn-mini"
 							lay-event="del" onclick="deleteDepart(${dept.id});">删除</a>
 						</td>

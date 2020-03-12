@@ -41,5 +41,7 @@ public interface DepartMapper {
 	public List<Depart> getAllDepart();
 	
 	public List<String> getAllDepartName();
+	//根据id获取部门信息
+	public Depart getDepartById(int id);
 
 }

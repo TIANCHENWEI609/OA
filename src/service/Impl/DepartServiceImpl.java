@@ -54,4 +54,9 @@ public class DepartServiceImpl implements DepartService {
 		// TODO Auto-generated method stub
 		return mapper.getAllDepartName();
 	}
+	@Override
+	public Depart getDepartById(int id) {
+		// TODO Auto-generated method stub
+		return mapper.getDepartById(id);
+	}
 }
