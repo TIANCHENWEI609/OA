@@ -27,7 +27,7 @@ public class DepartController {
 	@Autowired
 	DepartService service;
 	
-	
+	//测试一下分支代码的合并
 	//新增员工查询部门下拉框信息
 	@RequestMapping(value="/getAllDeptList")
 	@ResponseBody
