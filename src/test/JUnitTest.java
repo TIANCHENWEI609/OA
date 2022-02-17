@@ -24,6 +24,9 @@ import pojo.Emp;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class JUnitTest {
+	
+	
+	//增加校验，测试一下git
 	@Autowired
 	EmpMapper empMapper;
 	@Autowired
