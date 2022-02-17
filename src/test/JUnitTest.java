@@ -26,7 +26,7 @@ import pojo.Emp;
 public class JUnitTest {
 	
 	
-	//增加校验，测试一下git
+	//增我今天改了测试内容了，我就随便增肌了点东西
 	@Autowired
 	EmpMapper empMapper;
 	@Autowired
